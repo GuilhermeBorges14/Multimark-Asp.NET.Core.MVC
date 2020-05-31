@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1145
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multimark", "Multimark\Multimark.csproj", "{602B2684-01C3-41DA-B26B-EE518A70E46C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{602B2684-01C3-41DA-B26B-EE518A70E46C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{602B2684-01C3-41DA-B26B-EE518A70E46C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{602B2684-01C3-41DA-B26B-EE518A70E46C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{602B2684-01C3-41DA-B26B-EE518A70E46C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1AEFE83-FE4E-471F-8951-62E9AB3CDCF5}
+	EndGlobalSection
+EndGlobal
