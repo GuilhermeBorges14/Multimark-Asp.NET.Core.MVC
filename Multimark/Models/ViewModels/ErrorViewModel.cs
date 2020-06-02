@@ -1,6 +1,6 @@
 using System;
 
-namespace Multimark.Models
+namespace Multimark.Models.ViewModels
 {
     public class ErrorViewModel
     {
