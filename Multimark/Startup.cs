@@ -37,7 +37,8 @@ namespace Multimark
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<MultimarkContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("MultimarkContext")));
+                    options.UseMySql(Configuration.GetConnectionString("MultimarkContext"), builder =>
+                    builder.MigrationsAssembly("Multimark")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
