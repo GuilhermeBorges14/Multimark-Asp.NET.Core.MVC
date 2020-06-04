@@ -13,6 +13,8 @@ namespace Multimark.Models
         {
         }
 
-        public DbSet<Multimark.Models.Categories> Categories { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        
+        public DbSet<Product> Product { get; set; }
     }
 }
