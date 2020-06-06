@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Multimark.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Multimark.Services
 {
@@ -28,7 +29,7 @@ namespace Multimark.Services
 
         public Product FindById(int id)
         {
-            return _context.Product.FirstOrDefault(x => x.Id == id);
+            return _context.Product.Include(obj => obj.Categorie).FirstOrDefault(x => x.Id == id);
         }
 
         public void Remove(int id)

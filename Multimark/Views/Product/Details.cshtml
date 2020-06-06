@@ -1,10 +1,11 @@
 ﻿@model Multimark.Models.Product
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Details";
 }
-<hr />
-<h2>Tem certeza que deseja remover?</h2>
+
+<h2>Detalhes</h2>
+
 <div>
     <h4>Produto</h4>
     <hr />
@@ -52,11 +53,9 @@
             @Html.DisplayFor(model => model.Date)
         </dd>
     </dl>
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Deletar" class="btn btn-danger" /> <hr />
-        <a asp-action="Index">Voltar para a lista</a>
-    </form>
+</div>
+<div>
+    <a asp-action="Edit" aps-route-id="@Model.Id" class="btn btn-default">Editar</a> <hr />
+    <a asp-action="Index" aps-route-id="@Model.Id">Voltar para a lista</a>
 </div>
 
