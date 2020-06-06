@@ -15,6 +15,7 @@ namespace Multimark.Models
         public int Quantity { get; set; }
         public Size Size { get; set; }
         public DateTime Date { get; set; }
+        public int CategoriesId { get; set; }
 
 
         public Product()

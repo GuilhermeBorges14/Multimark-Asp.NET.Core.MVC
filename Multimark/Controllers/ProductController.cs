@@ -5,16 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Multimark.Services;
 using Multimark.Models;
+using Multimark.Models.ViewModels;
 
 namespace Multimark.Controllers
 {
     public class ProductController : Controller
     {
         private readonly ProductService _productService;
+        private readonly CategoriesService _categoriesService;
 
-        public ProductController(ProductService productService)
+        public ProductController(ProductService productService, CategoriesService categoriesService)
         {
             _productService = productService;
+            _categoriesService = categoriesService;
         }
 
         public IActionResult Index()
@@ -25,7 +28,9 @@ namespace Multimark.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var categories = _categoriesService.FindAll();
+            var viewModel = new ProductFormViewModel { Categories = categories };
+            return View(viewModel);
         }
 
         [HttpPost]
