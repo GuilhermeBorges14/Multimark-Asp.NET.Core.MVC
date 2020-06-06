@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Multimark.Models;
 using Microsoft.EntityFrameworkCore;
+using Multimark.Services.Exceptions;
 
 namespace Multimark.Services
 {
@@ -37,6 +38,23 @@ namespace Multimark.Services
             var obj = _context.Product.Find(id);
             _context.Product.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(Product obj)
+        {
+            if(!_context.Product.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id não encontrado!");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch(DbUpdateConcurrencyException exp)
+            {
+                throw new DbConcurrencyException(exp.Message);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Multimark.Services;
 using Multimark.Models;
 using Multimark.Models.ViewModels;
+using Multimark.Services.Exceptions;
 
 namespace Multimark.Controllers
 {
@@ -81,6 +82,49 @@ namespace Multimark.Controllers
             }
 
             return View(obj);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _productService.FindById(id.Value);
+
+            if (obj == null)
+            {
+                NotFound();
+            }
+
+            List<Categories> categories = _categoriesService.FindAll();
+            ProductFormViewModel viewModel = new ProductFormViewModel { Product = obj, Categories = categories };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Product product)
+        {
+            if(id != product.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _productService.Update(product);
+                return RedirectToAction(nameof(Index));
+            }
+            catch(NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }

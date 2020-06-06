@@ -4,15 +4,12 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Cadastre o Produto</h2>
+<h2>Edite o Produto</h2>
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div class="form-group">
-                <label asp-for="Product.Id" class="control-label">Id</label>
-                <input asp-for="Product.Id" class="form-control" />
-            </div>
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Product.Id" />
             <div class="form-group">
                 <label asp-for="Product.Name" class="control-label">Nome</label>
                 <input asp-for="Product.Name" class="form-control" />
@@ -40,7 +37,7 @@
 
 
             <div class="form-group">
-                <input type="submit" value="Cadastrar" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-default" />
             </div>
         </form>
     </div>
