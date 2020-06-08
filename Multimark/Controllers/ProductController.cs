@@ -25,6 +25,8 @@ namespace Multimark.Controllers
         public IActionResult Index()
         {
             var list = _productService.FindAll();
+            var categories = _categoriesService.FindAll();
+            var viewModel = new ProductFormViewModel { Categories = categories };
             return View(list);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Multimark.Models.Enums;
@@ -11,9 +12,14 @@ namespace Multimark.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public Categories Categorie { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double Price { get; set; }
         public int Quantity { get; set; }
         public Size Size { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date { get; set; }
         public int CategoriesId { get; set; }
 
