@@ -7,6 +7,7 @@ using Multimark.Services;
 using Multimark.Models;
 using Multimark.Models.ViewModels;
 using Multimark.Services.Exceptions;
+using System.Diagnostics;
 
 namespace Multimark.Controllers
 {
@@ -39,21 +40,20 @@ namespace Multimark.Controllers
         public IActionResult Create(Product product)
         {
             _productService.Insert(product);
-            return RedirectToAction(nameof(Index)) ;
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
             var obj = _productService.FindById(id.Value);
-
-            if(obj == null)
+            if (obj == null)
             {
-                NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
             return View(obj);
@@ -71,14 +71,13 @@ namespace Multimark.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
             var obj = _productService.FindById(id.Value);
-
             if (obj == null)
             {
-                NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
             return View(obj);
@@ -88,14 +87,13 @@ namespace Multimark.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
             var obj = _productService.FindById(id.Value);
-
             if (obj == null)
             {
-                NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
             List<Categories> categories = _categoriesService.FindAll();
@@ -105,26 +103,31 @@ namespace Multimark.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Product product)
+        public IActionResult Edit(int id, Product seller)
         {
-            if(id != product.Id)
+            if (id != seller.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Ids não correspondem!" });
             }
-
             try
             {
-                _productService.Update(product);
+                _productService.Update(seller);
                 return RedirectToAction(nameof(Index));
             }
-            catch(NotFoundException)
+            catch (ApplicationException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
             {
-                return BadRequest();
-            }
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }
