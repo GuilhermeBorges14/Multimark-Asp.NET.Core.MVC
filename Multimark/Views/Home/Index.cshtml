@@ -2,6 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+<div class="text-center">
+    @{
+        Context.Request.Cookies.TryGetValue("User", out string value);
+        <h1 class="text-center">Bem vindo @value</h1>
+    }
+</div>
+
 <div pt-md-2>
     <h3 class="text-center">
         

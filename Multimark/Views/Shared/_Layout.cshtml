@@ -35,6 +35,27 @@
                     <li><a asp-area="" asp-controller="Product" asp-action="Index">Produtos</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+
+                    @{ Context.Request.Cookies.TryGetValue("User", out string value);
+                        if (value != null)
+                        {
+                            if (value.ToString() != "")
+                            {
+                                <li><a asp-area="" asp-controller="Public" asp-action="Logout">Sair</a></li>
+                            }
+                            else
+                            {
+                                <script type="text/javascript">
+                                    window.location.href="@Url.Action("AcessoNegado","Public")"
+                                </script>
+                            }
+                        }
+                        else
+                        {
+                            <script type="text/javascript">
+                                    window.location.href="@Url.Action("AcessoNegado","Public")"
+                            </script>
+                        } }
                 </ul>
             </div>
         </div>
