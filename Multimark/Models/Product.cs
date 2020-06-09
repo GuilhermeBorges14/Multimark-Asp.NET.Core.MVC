@@ -10,17 +10,27 @@ namespace Multimark.Models
     public class Product
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage ="Nome obrigatório")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "O tamanho do nome deve ser entre 3 e 60 caracteres")]
         public string Name { get; set; }
+
         public Categories Categorie { get; set; }
 
+        [Required(ErrorMessage = "Preço obrigatório")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
+        [Range(1.0, 500.0, ErrorMessage = "O preço deve ser entre R${1} e R${2}")]
         public double Price { get; set; }
+
+        [Required(ErrorMessage = "Quantidade obrigatórioa")]
         public int Quantity { get; set; }
+
         public Size Size { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date { get; set; }
+
         public int CategoriesId { get; set; }
 
 

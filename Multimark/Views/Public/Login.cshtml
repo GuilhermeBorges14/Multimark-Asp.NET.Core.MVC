@@ -11,21 +11,24 @@
     <div>
         <h3 class="text-center">@ViewBag.Error</h3>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <link href="~/css/Login.css" rel="stylesheet" />
+
+
+
+        <input type="text" name="utilizador" id="login" class="form-control fadeIn second" placeholder="Usuário" />
+        <input type="text" name="senha" id="password" class="form-control fadeIn second" placeholder="Senha" />
         <div class="form-group">
-            <label class="col-md-2">Utilizador</label>
-            <input type="text" name="utilizador" id="utilizador" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label class="col-md-2">Senha</label>
-            <input type="password" name="senha" id="senha" class="form-control" />
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
+            <div class="col-md-2 fadeIn fourth">
+                <input type="submit" value="Login" />
             </div>
         </div>
+
     </div>
 
-
+  
 
 }
+

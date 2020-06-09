@@ -41,6 +41,13 @@ namespace Multimark.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Product product)
         {
+            if (!ModelState.IsValid)
+            {
+                var categories = _categoriesService.FindAll();
+                var viewModel = new ProductFormViewModel { Product = product, Categories = categories };
+                return View(viewModel);
+            }
+
             _productService.Insert(product);
             return RedirectToAction(nameof(Index));
         }
@@ -105,15 +112,24 @@ namespace Multimark.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Product seller)
+        public IActionResult Edit(int id, Product product)
         {
-            if (id != seller.Id)
+
+
+            if (!ModelState.IsValid)
+            {
+                var categories = _categoriesService.FindAll();
+                var viewModel = new ProductFormViewModel { Product = product, Categories = categories };
+                return View(viewModel);
+            }
+
+            if (id != product.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Ids não correspondem!" });
             }
             try
             {
-                _productService.Update(seller);
+                _productService.Update(product);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)
