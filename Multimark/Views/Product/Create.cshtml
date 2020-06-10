@@ -42,13 +42,17 @@
 
 
             <div class="form-group">
-                <input type="submit" value="Cadastrar" class="btn btn-default" />
+                <input type="submit" value="Cadastrar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
-Client-side validation:
+<div>
+    <a asp-action="Index"> <img src="~/images/back.png" /> Voltar</a>
+</div>
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

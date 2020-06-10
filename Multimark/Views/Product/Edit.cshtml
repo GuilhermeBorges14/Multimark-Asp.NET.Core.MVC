@@ -40,14 +40,14 @@
 
 
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
         <a asp-action="Index"> <img src="~/images/back.png" /> Voltar</a>
     </div>
 </div>
 
-Client-side validation:
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

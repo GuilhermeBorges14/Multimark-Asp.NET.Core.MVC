@@ -1,4 +1,4 @@
-﻿@model Multimark.Models.Categories
+﻿@model Multimark.Models.Adm
 
 @{
     ViewData["Title"] = "Details";
@@ -7,14 +7,20 @@
 <h2>Detalhes</h2>
 
 <div>
-    <h4>Categoria</h4>
+    <h4>Funcionário</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Nome
+            Usuário
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.User)
+        </dd>
+        <dt>
+            Senha
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Password)
         </dd>
     </dl>
 </div>
