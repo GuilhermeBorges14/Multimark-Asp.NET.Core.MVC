@@ -8,6 +8,8 @@ namespace Multimark.Models
 {
     public class MultimarkContext : DbContext
     {
+        
+
         public MultimarkContext (DbContextOptions<MultimarkContext> options)
             : base(options)
         {

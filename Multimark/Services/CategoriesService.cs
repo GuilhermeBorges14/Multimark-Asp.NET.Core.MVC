@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Multimark.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Multimark.Services
 {
@@ -15,9 +16,9 @@ namespace Multimark.Services
             _context = context;
         }
 
-        public List<Categories> FindAll()
+        public async Task<List<Categories>> FindAllAsync()
         {
-            return _context.Categories.OrderBy(x => x.Name).ToList();
+            return await _context.Categories.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }

@@ -17,39 +17,41 @@ namespace Multimark.Services
             _context = context;
         }
 
-        public List<Product> FindAll()
+        public async Task<List<Product>> FindAllAsync()
         {
-            return _context.Product.ToList();
+            return await _context.Product.ToListAsync();
         }
 
-        public void Insert(Product obj)
+        public async Task InsertAsync(Product obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
-        public Product FindById(int id)
+        public async Task<Product> FindByIdAsync(int id)
         {
-            return _context.Product.Include(obj => obj.Categorie).FirstOrDefault(x => x.Id == id);
+            return await _context.Product.Include(obj => obj.Categorie).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Product.Find(id);
+            var obj = await _context.Product.FindAsync(id);
             _context.Product.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Product obj)
+        public async Task UpdateAsync(Product obj)
         {
-            if(!_context.Product.Any(x => x.Id == obj.Id))
+            bool hasAny = await _context.Product.AnyAsync(x => x.Id == obj.Id);
+
+            if (!hasAny)
             {
                 throw new NotFoundException("Id não encontrado!");
             }
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
             catch(DbUpdateConcurrencyException exp)
             {

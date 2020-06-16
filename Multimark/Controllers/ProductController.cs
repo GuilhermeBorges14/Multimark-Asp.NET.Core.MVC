@@ -22,44 +22,45 @@ namespace Multimark.Controllers
             _categoriesService = categoriesService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var list = _productService.FindAll();
-            var categories = _categoriesService.FindAll();
+            var list = await _productService.FindAllAsync();
+            var categories = await _categoriesService.FindAllAsync();
             var viewModel = new ProductFormViewModel { Categories = categories };
+            
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var categories = _categoriesService.FindAll();
+            var categories = await _categoriesService.FindAllAsync();
             var viewModel = new ProductFormViewModel { Categories = categories };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Product product)
+        public async Task<IActionResult> Create(Product product)
         {
             if (!ModelState.IsValid)
             {
-                var categories = _categoriesService.FindAll();
+                var categories = await _categoriesService.FindAllAsync();
                 var viewModel = new ProductFormViewModel { Product = product, Categories = categories };
                 return View(viewModel);
             }
 
-            _productService.Insert(product);
+            await _productService.InsertAsync(product);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
-            var obj = _productService.FindById(id.Value);
+            var obj = await _productService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
@@ -70,20 +71,20 @@ namespace Multimark.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _productService.Remove(id);
+            await _productService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
-            var obj = _productService.FindById(id.Value);
+            var obj = await _productService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
@@ -92,33 +93,33 @@ namespace Multimark.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
-            var obj = _productService.FindById(id.Value);
+            var obj = await _productService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
-            List<Categories> categories = _categoriesService.FindAll();
+            List<Categories> categories = await _categoriesService.FindAllAsync();
             ProductFormViewModel viewModel = new ProductFormViewModel { Product = obj, Categories = categories };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Product product)
+        public async Task<IActionResult> Edit(int id, Product product)
         {
 
 
             if (!ModelState.IsValid)
             {
-                var categories = _categoriesService.FindAll();
+                var categories = await _categoriesService.FindAllAsync();
                 var viewModel = new ProductFormViewModel { Product = product, Categories = categories };
                 return View(viewModel);
             }
@@ -129,7 +130,7 @@ namespace Multimark.Controllers
             }
             try
             {
-                _productService.Update(product);
+                await _productService.UpdateAsync(product);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

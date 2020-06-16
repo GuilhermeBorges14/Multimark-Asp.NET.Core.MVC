@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Multimark.Models.Enums;
+using System.Globalization;
 
 namespace Multimark.Models
 {
@@ -19,7 +20,7 @@ namespace Multimark.Models
 
         [Required(ErrorMessage = "Preço obrigatório")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
-        [Range(1.0, 500.0, ErrorMessage = "O preço deve ser entre R${1} e R${2}")]
+        [Range(0, 500.00, ErrorMessage = "O preço deve ser entre R${1} e R${2}")]
         public double Price { get; set; }
 
         [Required(ErrorMessage = "Quantidade obrigatórioa")]
