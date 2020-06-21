@@ -2,21 +2,47 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-<div class="text-center">
-    @{
-        Context.Request.Cookies.TryGetValue("User", out string value);
-        <h1 class="text-center">Bem vindo @value</h1>
-    }
+<br />
+<div class="row" style="text-align:center; font-family:Arial; font-size:medium; color:#242424;">
+    <div class="col-lg-3">
+        <div class="row">
+           <a href="../Clients/Index"><img src="~/images/clientes.png" width="150" height="150" /></a> 
+        </div>
+        <span>Cadastro de Clientes</span>
+    </div>
+    <div class="col-lg-3">
+        <div class="row">
+            <a href="../Categories/Index"><img src="~/images/Categorias.png" width="150" height="150" /></a>
+        </div>
+        <span>Cadastro de Categorias</span>
+    </div>
+    <div class="col-lg-3">
+        <div class="row">
+            <a href="../Product/Index"><img src="~/images/produtos.png" width="150" height="150" /></a>
+        </div>
+        <span>Cadastro de Produtos</span>
+    </div>
 </div>
-<hr />
-<div pt-md-2>
-    <h3 class="text-center">
-        
-        <a asp-area="" asp-controller=" " asp-action=" ">
-            <img src="~/images/shop.png" /> Adicionar Venda
-
-        </a>
-    </h3>
-    <img class="center-block" src="~/images/77394085_1209490502583658_1774817985790214144_n.jpg" />
+<br /><br />
+<div class="row" style="text-align:center; font-family:Arial; font-size:medium; color:#242424;">
+    <div class="col-lg-3">
+        <div class="row">
+            <a href="../Sales/Index"><img src="~/images/vendas.png" width="150" height="150" /></a>
+        </div>
+        <span>Registro de Vendas</span>
+    </div>
+    <div class="col-lg-3">
+        <div class="row">
+            <img src="~/images/relatorios.png" width="150" height="150" />
+        </div>
+        <span>Relatórios</span>
+    </div>
+    <div class="col-lg-3">
+        <div class="row">
+            <a href="../Adm/Index"><img src="~/images/vendedores.png" width="150" height="150" /></a>
+        </div>
+        <span>Cadastro de Funcionários</span>
+    </div>
 </div>
+
+

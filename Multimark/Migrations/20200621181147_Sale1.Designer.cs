@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Multimark.Models;
 
 namespace Multimark.Migrations
 {
     [DbContext(typeof(MultimarkContext))]
-    partial class MultimarkContextModelSnapshot : ModelSnapshot
+    [Migration("20200621181147_Sale1")]
+    partial class Sale1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,26 +78,6 @@ namespace Multimark.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Client");
-                });
-
-            modelBuilder.Entity("Multimark.Models.ItemSale", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<double>("ProductPrice");
-
-                    b.Property<int>("ProductQuantity");
-
-                    b.Property<int>("SaleId");
-
-                    b.Property<double>("SubTotal");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ItemSale");
                 });
 
             modelBuilder.Entity("Multimark.Models.Product", b =>

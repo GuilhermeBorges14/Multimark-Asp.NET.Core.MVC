@@ -22,7 +22,7 @@ namespace Multimark.Controllers
             _categoriesService = categoriesService;
         }
 
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index()
         {
             var list = await _productService.FindAllAsync();
             var categories = await _categoriesService.FindAllAsync();
@@ -42,6 +42,8 @@ namespace Multimark.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product product)
         {
+            
+
             if (!ModelState.IsValid)
             {
                 var categories = await _categoriesService.FindAllAsync();

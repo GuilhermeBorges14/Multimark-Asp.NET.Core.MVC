@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Multimark.Models;
 
 namespace Multimark.Models
 {
@@ -20,5 +21,12 @@ namespace Multimark.Models
         public DbSet<Product> Product { get; set; }
 
         public DbSet<Adm> Adms { get; set; }
+
+        public DbSet<Client> Client { get; set; }
+
+        public DbSet<Multimark.Models.Sale> Sale { get; set; }
+
+        public DbSet<Multimark.Models.ItemSale> ItemSale { get; set; }
+
     }
 }

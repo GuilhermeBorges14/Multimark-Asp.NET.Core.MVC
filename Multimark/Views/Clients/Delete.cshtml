@@ -1,0 +1,93 @@
+﻿@model Multimark.Models.Client
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Tem certeza que deseja remover o cliente?</h2>
+
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nome
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            Data de Nascimento
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            CPF/CNPJ
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cpf_Cnpj)
+        </dd>
+        <dt>
+            RG
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rg)
+        </dd>
+        <dt>
+            Endereço
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            Número da casa
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddressNumber)
+        </dd>
+        <dt>
+            Bairro
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Neighborhood)
+        </dd>
+        <dt>
+            Cidade
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            Telefone Fixo
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TelePhone)
+        </dd>
+        <dt>
+            Celular
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CellPhone)
+        </dd>
+        <dt>
+            Email
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            Observações
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Deletar" class="btn btn-danger" /> <hr />
+        <a asp-action="Index"> <img src="~/images/back.png" /> Voltar</a>
+    </form>
+</div>

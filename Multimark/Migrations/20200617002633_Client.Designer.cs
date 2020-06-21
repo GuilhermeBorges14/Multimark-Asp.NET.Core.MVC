@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Multimark.Models;
 
 namespace Multimark.Migrations
 {
     [DbContext(typeof(MultimarkContext))]
-    partial class MultimarkContextModelSnapshot : ModelSnapshot
+    [Migration("20200617002633_Client")]
+    partial class Client
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,26 +80,6 @@ namespace Multimark.Migrations
                     b.ToTable("Client");
                 });
 
-            modelBuilder.Entity("Multimark.Models.ItemSale", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<double>("ProductPrice");
-
-                    b.Property<int>("ProductQuantity");
-
-                    b.Property<int>("SaleId");
-
-                    b.Property<double>("SubTotal");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ItemSale");
-                });
-
             modelBuilder.Entity("Multimark.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -122,22 +104,6 @@ namespace Multimark.Migrations
                     b.HasIndex("CategoriesId");
 
                     b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("Multimark.Models.Sale", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ClientId");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<double>("Total");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sale");
                 });
 
             modelBuilder.Entity("Multimark.Models.Product", b =>

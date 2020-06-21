@@ -30,15 +30,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Categories" asp-action="Index">Categorias</a></li>
-                    <li><a asp-area="" asp-controller="Product" asp-action="Index">Produtos</a></li>
-                    <li><a asp-area="" asp-controller="Adm" asp-action="Index">Administrador</a></li>
+                    @*  <li><a asp-area="" asp-controller="Categories" asp-action="Index">Categorias</a></li>
+        <li><a asp-area="" asp-controller="Product" asp-action="Index">Produtos</a></li>
+        <li><a asp-area="" asp-controller="Adm" asp-action="Index">Administrador</a></li>*@
 
-                    @{ Context.Request.Cookies.TryGetValue("User", out string value);
+                    @{
+                        Context.Request.Cookies.TryGetValue("User", out string value);
                         if (value != null)
                         {
                             if (value.ToString() != "")
                             {
+                                <li><a asp-area=""  >Olá @value</a></li>
                                 <li><a asp-area="" asp-controller="Adm" asp-action="Logout">Sair</a></li>
                             }
                             else

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Multimark.Models.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Clientes</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-default">Cadastrar Cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr class="bg-primary">
+            <th>
+                Id
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                CPF/CNPJ
+            </th>
+            <th>
+                Telefone
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cpf_Cnpj)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CellPhone)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
