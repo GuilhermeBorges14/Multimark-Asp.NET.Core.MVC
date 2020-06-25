@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,9 @@ namespace Multimark.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date { get; set; }
         public string Cpf_Cnpj { get; set; }
         public string Rg { get; set; }
@@ -20,6 +24,8 @@ namespace Multimark.Models
         public string CellPhone { get; set; }
         public string Email { get; set; }
         public string Comments { get; set; }
+
+        public ICollection<Sales> Sales { get; set; } = new List<Sales>();
 
         public Client()
         {
@@ -42,6 +48,16 @@ namespace Multimark.Models
             CellPhone = cellPhone;
             Email = email;
             Comments = comments;
+        }
+
+        public void AddSale(Sales sales)
+        {
+            Sales.Add(sales);
+        }
+
+        public double TotalSales(DateTime initial, DateTime final)
+        {
+            return Sales.Sum(sale => sale.TotalSales(initial, final));
         }
     }
 }

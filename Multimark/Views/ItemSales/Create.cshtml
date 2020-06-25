@@ -1,4 +1,4 @@
-﻿@model Multimark.Models.ItemSale
+﻿@model Multimark.Models.ItemSales
 
 @{
     ViewData["Title"] = "Create";
@@ -6,36 +6,35 @@
 
 <h2>Create</h2>
 
-<h4>ItemSale</h4>
+<h4>ItemSales</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="SalesId" class="control-label"></label>
+                <select asp-for="SalesId" class ="form-control" asp-items="ViewBag.SalesId"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="ProductId" class="control-label"></label>
                 <input asp-for="ProductId" class="form-control" />
                 <span asp-validation-for="ProductId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SaleId" class="control-label"></label>
-                <input asp-for="SaleId" class="form-control" />
-                <span asp-validation-for="SaleId" class="text-danger"></span>
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductQuantity" class="control-label"></label>
-                <input asp-for="ProductQuantity" class="form-control" />
-                <span asp-validation-for="ProductQuantity" class="text-danger"></span>
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductPrice" class="control-label"></label>
-                <input asp-for="ProductPrice" class="form-control" />
-                <span asp-validation-for="ProductPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SubTotal" class="control-label"></label>
-                <input asp-for="SubTotal" class="form-control" />
-                <span asp-validation-for="SubTotal" class="text-danger"></span>
+                <label asp-for="Subtotal" class="control-label"></label>
+                <input asp-for="Subtotal" class="form-control" />
+                <span asp-validation-for="Subtotal" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

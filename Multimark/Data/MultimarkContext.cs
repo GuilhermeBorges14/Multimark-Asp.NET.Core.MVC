@@ -24,9 +24,13 @@ namespace Multimark.Models
 
         public DbSet<Client> Client { get; set; }
 
-        public DbSet<Multimark.Models.Sale> Sale { get; set; }
+        public DbSet<Sales> Sales { get; set; }
 
-        public DbSet<Multimark.Models.ItemSale> ItemSale { get; set; }
+        public DbSet<ItemSales> ItemSales { get; set; }
+
+    
+
+
 
     }
 }

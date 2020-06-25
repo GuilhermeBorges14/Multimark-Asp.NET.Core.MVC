@@ -12,15 +12,18 @@
 
     
             <div>
-                <h3 class="text-center">@ViewBag.Error</h3>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                
 
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
                 <style type="text/css">
                     .login-form {
                         width: 385px;
-                        margin: 30px auto;
+                        margin: 100px auto;
+                        padding: 20px;
+                        background-color:#c8dae6;
+                        border-radius:10px;
                     }
 
                         .login-form form {
@@ -36,7 +39,8 @@
 
                     .form-control, .login-btn {
                         min-height: 38px;
-                        border-radius: 2px;
+                        border-radius: 5px;
+
                     }
 
                     .input-group-addon .fa {
@@ -86,28 +90,30 @@
                 </style>
 
                 <div class="login-form">
-                    <form action="/examples/actions/confirmation.php" method="post">
-                        <h2 class="text-center">Login</h2>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control" name="utilizador" placeholder="Usuário" required="required">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="password" class="form-control" name="senha" placeholder="Senha" required="required">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary login-btn btn-block">Entrar</button>
-                        </div>
-                        <div class="clearfix">
-                            <label class="pull-left checkbox-inline"><input type="checkbox"> Lembre-se de mim</label>
-                        </div>
+                    <h3 class="text-center">@ViewBag.Error</h3>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    </form>
+                    <h2 class="text-center">Login</h2>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" name="utilizador" placeholder="Usuário" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" class="form-control" name="senha" placeholder="Senha" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary login-btn btn-block">Entrar</button>
+                    </div>
+                    <div class="clearfix">
+                        <label class="pull-left checkbox-inline"><input type="checkbox"> Lembre-se de mim</label>
+                    </div>
+
+
                 </div>
             </div>
 

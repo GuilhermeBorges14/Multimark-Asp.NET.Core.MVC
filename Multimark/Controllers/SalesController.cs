@@ -3,150 +3,156 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using Multimark.Services;
 using Multimark.Models;
+using Multimark.Models.ViewModels;
+using Multimark.Services.Exceptions;
+using System.Diagnostics;
+using Multimark.Models.Enums;
 
 namespace Multimark.Controllers
 {
     public class SalesController : Controller
     {
-        private readonly MultimarkContext _context;
+        private readonly SalesService _salesService;
+        private readonly ClientService _clientService;
 
-        public SalesController(MultimarkContext context)
+        public SalesController(SalesService salesService, ClientService clientService)
         {
-            _context = context;
+            _salesService = salesService;
+            _clientService = clientService;
         }
 
-        // GET: Sales
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sale.ToListAsync());
+            var list = await _salesService.FindAllAsync();
+            var clients = await _clientService.FindAllAsync();
+            var viewModel = new SalesFormViewModel { Clients = clients };
+
+            return View(list);
         }
 
-        // GET: Sales/Details/5
-        public async Task<IActionResult> Details(int? id)
+            public async Task<IActionResult> Create()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var sale = await _context.Sale
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (sale == null)
-            {
-                return NotFound();
-            }
-
-            return View(sale);
+            var clients = await _clientService.FindAllAsync();
+            var viewModel = new SalesFormViewModel { Clients = clients };
+            return View(viewModel);
         }
 
-        // GET: Sales/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Sales/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,ClientId,Total")] Sale sale)
+        public async Task<IActionResult> Create(Sales sales)
         {
-            if (ModelState.IsValid)
+
+
+            if (!ModelState.IsValid)
             {
-                _context.Add(sale);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var clients = await _clientService.FindAllAsync();
+                var viewModel = new SalesFormViewModel { Sales = sales, Clients = clients };
+                return View(viewModel);
             }
-            return View(sale);
+
+            await _salesService.InsertAsync(sales);
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Sales/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var sale = await _context.Sale.FindAsync(id);
-            if (sale == null)
-            {
-                return NotFound();
-            }
-            return View(sale);
-        }
-
-        // POST: Sales/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,ClientId,Total")] Sale sale)
-        {
-            if (id != sale.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(sale);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SaleExists(sale.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(sale);
-        }
-
-        // GET: Sales/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
 
-            var sale = await _context.Sale
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (sale == null)
+            var obj = await _salesService.FindByIdAsync(id.Value);
+            if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
-            return View(sale);
+            return View(obj);
         }
 
-        // POST: Sales/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var sale = await _context.Sale.FindAsync(id);
-            _context.Sale.Remove(sale);
-            await _context.SaveChangesAsync();
+            await _salesService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SaleExists(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return _context.Sale.Any(e => e.Id == id);
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
+            }
+
+            var obj = await _salesService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
+            }
+
+            return View(obj);
         }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
+            }
+
+            var obj = await _salesService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
+            }
+
+            List<Client> clients = await _clientService.FindAllAsync();
+            SalesFormViewModel viewModel = new SalesFormViewModel { Sales = obj, Clients = clients};
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Sales sales)
+        {
+
+
+            if (!ModelState.IsValid)
+            {
+                var clients = await _clientService.FindAllAsync();
+                var viewModel = new SalesFormViewModel { Sales = sales, Clients = clients };
+                return View(viewModel);
+            }
+
+            if (id != sales.Id)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Ids não correspondem!" });
+            }
+            try
+            {
+                await _salesService.UpdateAsync(sales);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
+        }
+
+       
+
     }
 }

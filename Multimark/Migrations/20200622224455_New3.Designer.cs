@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Multimark.Models;
 
 namespace Multimark.Migrations
 {
     [DbContext(typeof(MultimarkContext))]
-    partial class MultimarkContextModelSnapshot : ModelSnapshot
+    [Migration("20200622224455_New3")]
+    partial class New3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,26 +80,6 @@ namespace Multimark.Migrations
                     b.ToTable("Client");
                 });
 
-            modelBuilder.Entity("Multimark.Models.ItemSales", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Price");
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<int>("SalesId");
-
-                    b.Property<double>("Subtotal");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ItemSales");
-                });
-
             modelBuilder.Entity("Multimark.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -124,48 +106,12 @@ namespace Multimark.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Multimark.Models.Sales", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ClientId");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int?>("SalesId");
-
-                    b.Property<int>("Status");
-
-                    b.Property<double>("Total");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("SalesId");
-
-                    b.ToTable("Sales");
-                });
-
             modelBuilder.Entity("Multimark.Models.Product", b =>
                 {
                     b.HasOne("Multimark.Models.Categories", "Categorie")
                         .WithMany("Products")
                         .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Multimark.Models.Sales", b =>
-                {
-                    b.HasOne("Multimark.Models.Client", "Client")
-                        .WithMany("Sales")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Multimark.Models.Sales")
-                        .WithMany("Saless")
-                        .HasForeignKey("SalesId");
                 });
 #pragma warning restore 612, 618
         }

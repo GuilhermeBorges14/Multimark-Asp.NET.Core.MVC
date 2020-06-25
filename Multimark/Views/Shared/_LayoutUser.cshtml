@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    <style>
+        body {
+            background-image:url(../images/bg.jpg)
+            
+        }
+    </style>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -31,10 +37,7 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2020 - Control Basic</p>
-        </footer>
+        
     </div>
 
     <environment include="Development">

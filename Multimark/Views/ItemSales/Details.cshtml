@@ -1,4 +1,4 @@
-﻿@model Multimark.Models.ItemSale
+﻿@model Multimark.Models.ItemSales
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>ItemSale</h4>
+    <h4>ItemSales</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,28 +17,22 @@
             @Html.DisplayFor(model => model.ProductId)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.SaleId)
+            @Html.DisplayNameFor(model => model.Quantity)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.SaleId)
+            @Html.DisplayFor(model => model.Quantity)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ProductQuantity)
+            @Html.DisplayNameFor(model => model.Price)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ProductQuantity)
+            @Html.DisplayFor(model => model.Price)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ProductPrice)
+            @Html.DisplayNameFor(model => model.Subtotal)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ProductPrice)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SubTotal)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SubTotal)
+            @Html.DisplayFor(model => model.Subtotal)
         </dd>
     </dl>
 </div>

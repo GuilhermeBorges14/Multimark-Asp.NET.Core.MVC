@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Multimark.Models;
 
 namespace Multimark.Migrations
 {
     [DbContext(typeof(MultimarkContext))]
-    partial class MultimarkContextModelSnapshot : ModelSnapshot
+    [Migration("20200624022003_new11")]
+    partial class new11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,6 +97,8 @@ namespace Multimark.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SalesId");
+
                     b.ToTable("ItemSales");
                 });
 
@@ -133,8 +137,6 @@ namespace Multimark.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<int?>("SalesId");
-
                     b.Property<int>("Status");
 
                     b.Property<double>("Total");
@@ -143,9 +145,33 @@ namespace Multimark.Migrations
 
                     b.HasIndex("ClientId");
 
+                    b.ToTable("Sales");
+                });
+
+            modelBuilder.Entity("Multimark.Models.SalesRecord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int?>("SalesId");
+
+                    b.Property<int>("Status");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("SalesId");
 
-                    b.ToTable("Sales");
+                    b.ToTable("SalesRecords");
+                });
+
+            modelBuilder.Entity("Multimark.Models.ItemSales", b =>
+                {
+                    b.HasOne("Multimark.Models.Sales")
+                        .WithMany("ItemSales")
+                        .HasForeignKey("SalesId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Multimark.Models.Product", b =>
@@ -162,9 +188,12 @@ namespace Multimark.Migrations
                         .WithMany("Sales")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
 
-                    b.HasOne("Multimark.Models.Sales")
-                        .WithMany("Saless")
+            modelBuilder.Entity("Multimark.Models.SalesRecord", b =>
+                {
+                    b.HasOne("Multimark.Models.Sales", "Sales")
+                        .WithMany()
                         .HasForeignKey("SalesId");
                 });
 #pragma warning restore 612, 618

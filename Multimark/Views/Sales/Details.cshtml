@@ -1,36 +1,42 @@
-﻿@model Multimark.Models.Sale
+﻿@model Multimark.Models.Sales
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalhes da venda</h2>
 
 <div>
-    <h4>Sale</h4>
+    <h4>Venda Id : @Html.DisplayFor(model => model.Id)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            Data da venda
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Date)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ClientId)
+            Nome do cliente
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ClientId)
+            @Html.DisplayFor(model => model.Client.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Total)
+            Valor da venda
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Total)
+            R$ @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <a asp-action="Index"> <img src="~/images/back.png" /> Voltar</a>
 </div>

@@ -1,39 +1,45 @@
-﻿@model Multimark.Models.Sale
+﻿@model Multimark.Models.Sales
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+
+<h3>Tem certeza que deseja excluir a venda?</h3>
 <div>
-    <h4>Sale</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            Data da venda
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Date)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ClientId)
+            Nome do cliente
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ClientId)
+            @Html.DisplayFor(model => model.Client.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Total)
+            Valor da venda
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Total)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Deletar" class="btn btn-danger" /> |
+        <a asp-action="Index"> <img src="~/images/back.png" /> Voltar</a>
     </form>
 </div>

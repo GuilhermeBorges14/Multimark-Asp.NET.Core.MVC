@@ -21,7 +21,7 @@ namespace Multimark.Controllers
         // GET: ItemSales
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ItemSale.ToListAsync());
+            return View(await _context.ItemSales.ToListAsync());
         }
 
         // GET: ItemSales/Details/5
@@ -32,14 +32,14 @@ namespace Multimark.Controllers
                 return NotFound();
             }
 
-            var itemSale = await _context.ItemSale
+            var itemSales = await _context.ItemSales
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (itemSale == null)
+            if (itemSales == null)
             {
                 return NotFound();
             }
 
-            return View(itemSale);
+            return View(itemSales);
         }
 
         // GET: ItemSales/Create
@@ -53,15 +53,15 @@ namespace Multimark.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductId,SaleId,ProductQuantity,ProductPrice,SubTotal")] ItemSale itemSale)
+        public async Task<IActionResult> Create([Bind("Id,SalesId,ProductId,Quantity,Price,Subtotal")] ItemSales itemSales)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(itemSale);
+                _context.Add(itemSales);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(itemSale);
+            return View(itemSales);
         }
 
         // GET: ItemSales/Edit/5
@@ -72,12 +72,12 @@ namespace Multimark.Controllers
                 return NotFound();
             }
 
-            var itemSale = await _context.ItemSale.FindAsync(id);
-            if (itemSale == null)
+            var itemSales = await _context.ItemSales.FindAsync(id);
+            if (itemSales == null)
             {
                 return NotFound();
             }
-            return View(itemSale);
+            return View(itemSales);
         }
 
         // POST: ItemSales/Edit/5
@@ -85,9 +85,9 @@ namespace Multimark.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductId,SaleId,ProductQuantity,ProductPrice,SubTotal")] ItemSale itemSale)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SalesId,ProductId,Quantity,Price,Subtotal")] ItemSales itemSales)
         {
-            if (id != itemSale.Id)
+            if (id != itemSales.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace Multimark.Controllers
             {
                 try
                 {
-                    _context.Update(itemSale);
+                    _context.Update(itemSales);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemSaleExists(itemSale.Id))
+                    if (!ItemSalesExists(itemSales.Id))
                     {
                         return NotFound();
                     }
@@ -112,7 +112,7 @@ namespace Multimark.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(itemSale);
+            return View(itemSales);
         }
 
         // GET: ItemSales/Delete/5
@@ -123,14 +123,14 @@ namespace Multimark.Controllers
                 return NotFound();
             }
 
-            var itemSale = await _context.ItemSale
+            var itemSales = await _context.ItemSales
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (itemSale == null)
+            if (itemSales == null)
             {
                 return NotFound();
             }
 
-            return View(itemSale);
+            return View(itemSales);
         }
 
         // POST: ItemSales/Delete/5
@@ -138,15 +138,15 @@ namespace Multimark.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var itemSale = await _context.ItemSale.FindAsync(id);
-            _context.ItemSale.Remove(itemSale);
+            var itemSales = await _context.ItemSales.FindAsync(id);
+            _context.ItemSales.Remove(itemSales);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ItemSaleExists(int id)
+        private bool ItemSalesExists(int id)
         {
-            return _context.ItemSale.Any(e => e.Id == id);
+            return _context.ItemSales.Any(e => e.Id == id);
         }
     }
 }

@@ -50,5 +50,8 @@ namespace Multimark.Models
             Size = size;
             Date = date;
         }
+
+        
+        
     }
 }
