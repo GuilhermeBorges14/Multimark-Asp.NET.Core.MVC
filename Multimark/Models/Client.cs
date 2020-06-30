@@ -50,14 +50,6 @@ namespace Multimark.Models
             Comments = comments;
         }
 
-        public void AddSale(Sales sales)
-        {
-            Sales.Add(sales);
-        }
-
-        public double TotalSales(DateTime initial, DateTime final)
-        {
-            return Sales.Sum(sale => sale.TotalSales(initial, final));
-        }
+        
     }
 }

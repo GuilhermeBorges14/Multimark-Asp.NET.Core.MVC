@@ -21,6 +21,7 @@ namespace Multimark.Models
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double Total { get; set; }
         public Status Status { get; set; }
+        public int StatusId { get; set; }
 
         public ICollection<Sales> Saless{ get; set; } = new List<Sales>();
 
@@ -30,12 +31,13 @@ namespace Multimark.Models
 
         }
 
-        public Sales(int id, DateTime date, Client client, double total)
+        public Sales(int id, DateTime date, Client client, double total, Status status)
         {
             Id = id;
             Date = date;
             Client = client;
             Total = total;
+            Status = status;
         }
 
         public void AddSales(Sales sales)
@@ -48,9 +50,11 @@ namespace Multimark.Models
             Saless.Remove(sales);
         }
 
-        public double TotalSales(DateTime initial, DateTime final)
+        public double TotalSales()
         {
-            return Saless.Where(sr => sr.Date >= initial && sr.Date <= final).Sum(sr => sr.Total);
+            var sum = 0.0;
+            sum += Total;
+            return sum;
         }
     }
 }

@@ -26,11 +26,9 @@ namespace Multimark.Models
 
         public DbSet<Sales> Sales { get; set; }
 
-        public DbSet<ItemSales> ItemSales { get; set; }
+        public DbSet<Status> Status { get; set; }
 
-    
-
-
+        
 
     }
 }

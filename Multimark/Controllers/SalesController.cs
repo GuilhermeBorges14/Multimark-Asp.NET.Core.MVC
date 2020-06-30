@@ -16,18 +16,21 @@ namespace Multimark.Controllers
     {
         private readonly SalesService _salesService;
         private readonly ClientService _clientService;
+        private readonly StatusService _statusService;
 
-        public SalesController(SalesService salesService, ClientService clientService)
+        public SalesController(SalesService salesService, ClientService clientService, StatusService statusService)
         {
             _salesService = salesService;
             _clientService = clientService;
+            _statusService = statusService;
         }
 
         public async Task<IActionResult> Index()
         {
             var list = await _salesService.FindAllAsync();
             var clients = await _clientService.FindAllAsync();
-            var viewModel = new SalesFormViewModel { Clients = clients };
+            var status = await _statusService.FindAllAsync();
+            var viewModel = new SalesFormViewModel { Clients = clients, Status = status };
 
             return View(list);
         }
@@ -35,7 +38,8 @@ namespace Multimark.Controllers
             public async Task<IActionResult> Create()
         {
             var clients = await _clientService.FindAllAsync();
-            var viewModel = new SalesFormViewModel { Clients = clients };
+            var status = await _statusService.FindAllAsync();
+            var viewModel = new SalesFormViewModel { Clients = clients, Status = status };
             return View(viewModel);
         }
 
@@ -48,7 +52,8 @@ namespace Multimark.Controllers
             if (!ModelState.IsValid)
             {
                 var clients = await _clientService.FindAllAsync();
-                var viewModel = new SalesFormViewModel { Sales = sales, Clients = clients };
+                var status = await _statusService.FindAllAsync();
+                var viewModel = new SalesFormViewModel { Sales = sales, Clients = clients , Status = status};
                 return View(viewModel);
             }
 
@@ -110,7 +115,8 @@ namespace Multimark.Controllers
             }
 
             List<Client> clients = await _clientService.FindAllAsync();
-            SalesFormViewModel viewModel = new SalesFormViewModel { Sales = obj, Clients = clients};
+            List<Status> status = await _statusService.FindAllAsync();
+            SalesFormViewModel viewModel = new SalesFormViewModel { Sales = obj, Clients = clients, Status = status};
             return View(viewModel);
         }
 
@@ -123,7 +129,8 @@ namespace Multimark.Controllers
             if (!ModelState.IsValid)
             {
                 var clients = await _clientService.FindAllAsync();
-                var viewModel = new SalesFormViewModel { Sales = sales, Clients = clients };
+                var status = await _statusService.FindAllAsync();
+                var viewModel = new SalesFormViewModel { Sales = sales, Clients = clients, Status = status };
                 return View(viewModel);
             }
 

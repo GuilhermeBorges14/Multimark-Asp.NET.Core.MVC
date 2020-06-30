@@ -39,15 +39,28 @@
                    R$ @Html.DisplayFor(modelItem => item.Total)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+                    @Html.DisplayFor(modelItem => item.Status.Name)
                 </td>
                 <td>
                     <a asp-action="Details" asp-route-id=" @item.Id" class="btn btn-success">Detalhes</a>
-                    <a asp-action="Delete" asp-route-id=" @item.Id" class="btn btn-danger">Cancelar</a>
+                    <a asp-action="Edit" asp-route-id=" @item.Id" class="btn btn-danger">Cancelar</a>
                 </td>
             </tr>
         }
     </tbody>
+    
 </table>
 
+<style>
+    #totalsales{
+        text-align:center;
+        font-size:25px;
+    }
+</style>
+<br /><br />
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title" id="totalsales">Total de Vendas = R$ @Model.Sum(obj => obj.Total).ToString("F2")</h3>
+        </div>
+    </div>
 

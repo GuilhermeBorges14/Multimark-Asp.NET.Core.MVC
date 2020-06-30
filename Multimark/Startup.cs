@@ -47,7 +47,8 @@ namespace Multimark
             services.AddScoped<CategoriesService>();
             services.AddScoped<ClientService>();
             services.AddScoped<SalesService>();
-            
+            services.AddScoped<StatusService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

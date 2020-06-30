@@ -10,7 +10,7 @@ namespace Multimark.Models.ViewModels
     {
         public Sales Sales { get; set; }
         public ICollection<Client> Clients { get; set; }
-        public Status Statuss { get; set; }
+        public ICollection<Status> Status { get; set; }
 
     }
 }
