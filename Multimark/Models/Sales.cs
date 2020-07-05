@@ -40,21 +40,6 @@ namespace Multimark.Models
             Status = status;
         }
 
-        public void AddSales(Sales sales)
-        {
-            Saless.Add(sales);
-        }
-
-        public void RemoveSales(Sales sales)
-        {
-            Saless.Remove(sales);
-        }
-
-        public double TotalSales()
-        {
-            var sum = 0.0;
-            sum += Total;
-            return sum;
-        }
+      
     }
 }
